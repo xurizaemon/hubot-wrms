@@ -33,8 +33,9 @@ module.exports = function(robot) {
   })
 
   robot.hear(/(wrms search|search wrms( for)?) (.*)$/i, (msg) => {
+    const query = msg.match[3]
     const params = {
-      q: msg.match[3],
+      q: query,
       limit: config.search_max
     }
     msg.reply(`Searching WRMS for "${msg.match[3]}"`)
@@ -45,11 +46,14 @@ module.exports = function(robot) {
           msg.reply('No results')
         }
         else {
-          let reply = `${res.response.body.length} results:\n`
+          let reply = [`${res.response.body.length} results for ${query}:`]
+          if (res.response.body.length == config.search_max) {
+            reply.push(`(showing first ${config.search_max} results only, try a more specific search?)`)
+          }
           res.response.body.forEach(result => {
-            reply += `* ${result.description} - ${creds.endpoint}/${result.request_id}\n`
+            reply.push(`* ${result.description} - ${creds.endpoint}/${result.request_id}`)
           })
-          msg.reply(reply)
+          msg.reply(reply.join('\n'))
         }
       })
   })
