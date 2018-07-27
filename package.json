@@ -2,7 +2,7 @@
   "name": "hubot-wrms",
   "version": "0.0.1",
   "description": "Hubot plugin for WRMS",
-  "main": "src/wrms.coffee",
+  "main": "src/wrms.js",
   "scripts": {
     "test": "grunt test"
   },
