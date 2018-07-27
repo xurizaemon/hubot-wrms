@@ -1,0 +1,19 @@
+{
+  "name": "hubot-wrms",
+  "version": "0.0.1",
+  "description": "Hubot plugin for WRMS",
+  "main": "src/wrms.coffee",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.wgtn.cat-it.co.nz/chrisburgess/node-wrms"
+  },
+  "keywords": [
+    "hubot",
+    "wrms"
+  ],
+  "author": "Chris Burgess <chris.burgess@catalyst.net.nz>",
+  "license": "GPL-2.0+"
+}
