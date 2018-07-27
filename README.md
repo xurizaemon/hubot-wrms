@@ -18,9 +18,9 @@ Then add **hubot-wrms** to your `external-scripts.json`:
 
 ## Configuration
 
-  HUBOT_WRMS_URL=https://wrms.example.org
-  HUBOT_WRMS_USERNAME=yourusername
-  HUBOT_WRMS_PASSWORD=yourpassword
+    HUBOT_WRMS_URL=https://wrms.example.org
+    HUBOT_WRMS_USERNAME=yourusername
+    HUBOT_WRMS_PASSWORD=yourpassword
 
 ## Usage
 
