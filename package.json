@@ -8,12 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.wgtn.cat-it.co.nz/chrisburgess/node-wrms"
+    "url": "https://gitlab.wgtn.cat-it.co.nz/chrisburgess/hubot-wrms"
   },
   "keywords": [
     "hubot",
     "wrms"
   ],
   "author": "Chris Burgess <chris.burgess@catalyst.net.nz>",
-  "license": "GPL-2.0+"
+  "license": "GPL-2.0+",
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+  "directories": {
+    "lib": "./src"
+  },
+  "dependencies": {
+    "wrms": "git+ssh://git@gitlab.wgtn.cat-it.co.nz:chrisburgess/node-wrms"
+  }
 }
