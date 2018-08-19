@@ -6,7 +6,7 @@ WRMS functionality for Hubot
 
 In hubot project repo, run:
 
-`npm install hubot-wrms --save` (@todo)
+`npm install hubot-wrms --save`
 
 Then add **hubot-wrms** to your `external-scripts.json`:
 
