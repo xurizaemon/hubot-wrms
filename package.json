@@ -1,6 +1,6 @@
 {
   "name": "hubot-wrms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hubot plugin for WRMS",
   "main": "src/wrms.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.wgtn.cat-it.co.nz/chrisburgess/hubot-wrms"
+    "url": "https://gitlab.catalyst.net.nz/chrisburgess/hubot-wrms"
   },
   "keywords": [
     "hubot",
@@ -23,6 +23,6 @@
     "lib": "./src"
   },
   "dependencies": {
-    "wrms": "git+ssh://git@gitlab.wgtn.cat-it.co.nz:chrisburgess/node-wrms"
+    "wrms": "git+https://gitlab.catalyst.net.nz/chrisburgess/node-wrms"
   }
 }
