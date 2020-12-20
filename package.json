@@ -1,6 +1,6 @@
 {
   "name": "hubot-wrms",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hubot plugin for WRMS",
   "main": "src/wrms.js",
   "scripts": {
