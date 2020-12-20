@@ -10,7 +10,8 @@
 //   HUBOT_WRMS_PASSWORD=yourpassword
 //   HUBOT_WRMS_SEARCH_MAX=25
 //   HUBOT_WRMS_MENTION_REGEX='#(\d+)'
-//   HUBOT_WRMS_IGNORED_USERS=craig
+//   HUBOT_WRMS_IGNORED_USERS=bot
+//   HUBOT_WRMS_RESPONSE_TEMPLATE="WR-${request_id}: ${brief} (${last_status_label})"
 //
 // Commands:
 //   hubot wrms me <issue-id> - Show the issue status
