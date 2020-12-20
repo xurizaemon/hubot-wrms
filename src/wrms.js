@@ -10,13 +10,17 @@
 //   HUBOT_WRMS_PASSWORD=yourpassword
 //   HUBOT_WRMS_SEARCH_MAX=25
 //   HUBOT_WRMS_MENTION_REGEX='#(\d+)'
-//   HUBOT_WRMS_IGNORED_USERS=craig
+//   HUBOT_WRMS_IGNORED_USERS=bot
+//   HUBOT_WRMS_RESPONSE_TEMPLATE="WR-${request_id}: ${brief} (${last_status_label})"
 //
 // Commands:
 //   hubot wrms me <issue-id> - Show the issue status
 //   hubot search wrms <term> - Searches WRMS for <term>, returns up to HUBOT_WRMS_SEARCH_MAX results
 
 module.exports = function(robot) {
+  const fillTemplate = require('es6-dynamic-template')
+  const WRMS = require('wrms')
+
   const creds = {
     endpoint: process.env.HUBOT_WRMS_URL,
     username: process.env.HUBOT_WRMS_USERNAME,
@@ -24,27 +28,28 @@ module.exports = function(robot) {
   }
   const config = {
     url: process.env.HUBOT_WRMS_URL,
-    search_max: process.env.HUBOT_WRMS_SEARCH_MAX || 25
+    search_max: process.env.HUBOT_WRMS_SEARCH_MAX || 25,
+    ignoredUsers: process.env.HUBOT_WRMS_IGNORED_USERS || '',
+    responseTemplate: process.env.HUBOT_WRMS_RESPONSE_TEMPLATE || 'WR-${request_id}: ${brief} (${system_name}, ${request_type_label}, ${last_status_label}, ${urgency_label})\n${url}'
   }
-  const WRMS = require('wrms')
-  const wrms = new WRMS(creds)
 
-  const ignoredUsers = process.env.HUBOT_WRMS_IGNORED_USERS || ''
+  const wrms = new WRMS(creds)
 
   // Chime in when WR are mentioned.
   const mentionsRegexp = process.env.HUBOT_WRMS_MENTION_REGEX || '#(\\d+)'
+
   robot.hear(mentionsRegexp, (msg) => {
     const id = msg.match[1].replace('#', '')
-    if (isNaN(id) || ignoredUsers.split(',').includes(msg.message.user.name)) {
+    if (isNaN(id) || config.ignoredUsers.split(',').includes(msg.message.user.name)) {
       return
     }
     wrms.work_request.get(id)
       .then((res) => {
         if (typeof res.response.brief !== 'undefined') {
           const wr = res.response
-          const system = typeof wr.system.name !== 'undefined' ? wr.system.name : '?'
-          msg.send(`${wr.request_type_label} ${wr.request_id} (${system}): ${wr.brief} (${wr.last_status_label}) [${wr.urgency_label}]`)
-          msg.send(`${config.url}/${wr.request_id}`)
+          wr.url = `${config.url}/${wr.request_id}`
+          wr.system_name = typeof wr.system.name !== 'undefined' ? wr.system.name : '??'
+          msg.send(fillTemplate(config.responseTemplate, wr))
         }
       })
   })
